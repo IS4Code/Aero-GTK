@@ -1,0 +1,165 @@
+@import 'colors.css';
+
+/* Colors */
+
+@define-color custom_accent #bad2ea;
+@define-color custom_accent_backdrop mix(mix(@custom_accent, white, 0.5), gray, 0.2);
+
+/* Title bar */
+
+.titlebar {
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+    border-width: 0;
+    outline-width: 0;
+    box-shadow: none;
+}
+
+:not(.maximized):not(.fullscreen) .titlebar {
+    background: none;
+}
+
+.maximized .titlebar, .fullscreen .titlebar {
+    background-color: @custom_accent;
+    background-image: url("assets/reflection.png");
+}
+
+.maximized .titlebar:backdrop, .fullscreen .titlebar:backdrop {
+    background-color: @custom_accent_backdrop;
+}
+
+/* Title bar caption */
+
+.titlebar .title {
+    font-weight: normal;
+    text-shadow:
+        0 0 16px white, 0 0 8px white, 0 0 4px white, 0 0 2px white,
+        0 0 16px white, 0 0 8px white, 0 0 4px white,
+        0 0 16px white, 0 0 8px white;
+}
+
+/* Title bar buttons */
+
+@define-color custom_accent_button_1 alpha(@custom_accent, 0.3);
+@define-color custom_accent_button_1_backdrop alpha(@custom_accent_backdrop, 0.3);
+@define-color custom_accent_button_2 alpha(@custom_accent, 1);
+@define-color custom_accent_button_2_backdrop alpha(@custom_accent_backdrop, 1);
+
+.titlebar .titlebutton.minimize, .titlebar .titlebutton.maximize, .titlebar .titlebutton.close:backdrop:not(:hover) {
+    background-blend-mode: color, hue;
+}
+
+.titlebar .titlebutton.close:backdrop:not(:hover) {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/close-backdrop.png");
+}
+.titlebar .titlebutton.minimize {
+    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/minimize-normal.png");
+}
+.titlebar .titlebutton.minimize:hover {
+    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/minimize-hover.png");
+}
+.titlebar .titlebutton.minimize:active {
+    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/minimize-active.png");
+}
+.titlebar .titlebutton.minimize:backdrop:not(:hover) {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/minimize-backdrop.png");
+}
+.titlebar .titlebutton.minimize:backdrop:active {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/minimize-active.png");
+}
+.titlebar .titlebutton.maximize {
+    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/maximize-normal.png");
+}
+.titlebar .titlebutton.maximize:hover {
+    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/maximize-hover.png");
+}
+.titlebar .titlebutton.maximize:active {
+    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/maximize-active.png");
+}
+.titlebar .titlebutton.maximize:backdrop:not(:hover) {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/maximize-backdrop.png");
+}
+.titlebar .titlebutton.maximize:backdrop:active {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/maximize-active.png");
+}
+.maximized .titlebar .titlebutton.maximize {
+    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-normal.png");
+}
+.maximized .titlebar .titlebutton.maximize:hover {
+    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-hover.png");
+}
+.maximized .titlebar .titlebutton.maximize:active {
+    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-active.png");
+}
+.maximized .titlebar .titlebutton.maximize:backdrop:not(:hover) {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/restore-backdrop.png");
+}
+.maximized .titlebar .titlebutton.maximize:backdrop:active {
+    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/restore-active.png");
+}
+
+/* Window */
+
+:not(.maximized):not(.fullscreen) decoration {
+    border-radius: 8px;
+    padding: 6px;
+    padding-top: 0;
+    border: 2px groove mix(@custom_accent, black, 0.33333);
+    border-right-style: ridge;
+    border-bottom-style: ridge;
+
+    background-color: @custom_accent;
+    background-image: url("assets/reflection.png");
+}
+
+:not(.maximized):not(.fullscreen) decoration:backdrop {
+    background-color: @custom_accent_backdrop;
+    border-color: mix(@custom_accent_backdrop, black, 0.33333);
+}
+
+@define-color custom_accent_border_dark mix(@custom_accent, black, 0.5);
+@define-color custom_accent_border_light mix(@custom_accent, white, 0.5);
+@define-color custom_accent_border_dark_backdrop mix(@custom_accent_backdrop, black, 0.5);
+@define-color custom_accent_border_light_backdrop mix(@custom_accent_backdrop, white, 0.5);
+
+window, dialog {
+    box-shadow:
+        2px 0 @custom_accent_border_light,
+        -2px 0 @custom_accent_border_light,
+        0 2px @custom_accent_border_light,
+        0 -2px @custom_accent_border_light,
+        1.5px 1.5px @custom_accent_border_light,
+        -1.5px 1.5px @custom_accent_border_light,
+        1.5px -1.5px @custom_accent_border_light,
+        -1.5px -1.5px @custom_accent_border_light,
+        1px 0 @custom_accent_border_dark,
+        -1px 0 @custom_accent_border_dark,
+        0 1px @custom_accent_border_dark,
+        0 -1px @custom_accent_border_dark,
+        0.5px 0.5px @custom_accent_border_dark,
+        -0.5px 0.5px @custom_accent_border_dark,
+        0.5px -0.5px @custom_accent_border_dark,
+        -0.5px -0.5px @custom_accent_border_dark;
+}
+
+window:backdrop, dialog:backdrop {
+    box-shadow:
+        2px 0 @custom_accent_border_light_backdrop,
+        -2px 0 @custom_accent_border_light_backdrop,
+        0 2px @custom_accent_border_light_backdrop,
+        0 -2px @custom_accent_border_light_backdrop,
+        1.5px 1.5px @custom_accent_border_light_backdrop,
+        -1.5px 1.5px @custom_accent_border_light_backdrop,
+        1.5px -1.5px @custom_accent_border_light_backdrop,
+        -1.5px -1.5px @custom_accent_border_light_backdrop,
+        1px 0 @custom_accent_border_dark_backdrop,
+        -1px 0 @custom_accent_border_dark_backdrop,
+        0 1px @custom_accent_border_dark_backdrop,
+        0 -1px @custom_accent_border_dark_backdrop,
+        0.5px 0.5px @custom_accent_border_dark_backdrop,
+        -0.5px 0.5px @custom_accent_border_dark_backdrop,
+        0.5px -0.5px @custom_accent_border_dark_backdrop,
+        -0.5px -0.5px @custom_accent_border_dark_backdrop;
+}
