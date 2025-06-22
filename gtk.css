@@ -11,6 +11,7 @@
     min-height: 0;
     padding-top: 0;
     padding-bottom: 0;
+    padding-right: 0;
     border-radius: 0;
     border-width: 0;
     outline-width: 0;
@@ -19,11 +20,6 @@
 
 :not(.maximized):not(.fullscreen) .titlebar {
     background: none;
-}
-
-.maximized .titlebar, .fullscreen .titlebar {
-    background-color: @custom_accent;
-    background-image: url("assets/reflection.png");
 }
 
 .maximized .titlebar:backdrop, .fullscreen .titlebar:backdrop {
@@ -42,62 +38,81 @@
 
 /* Title bar buttons */
 
-@define-color custom_accent_button_1 alpha(@custom_accent, 0.3);
-@define-color custom_accent_button_1_backdrop alpha(@custom_accent_backdrop, 0.3);
-@define-color custom_accent_button_2 alpha(@custom_accent, 1);
-@define-color custom_accent_button_2_backdrop alpha(@custom_accent_backdrop, 1);
-
-.titlebar .titlebutton.minimize, .titlebar .titlebutton.maximize, .titlebar .titlebutton.close:backdrop:not(:hover) {
-    background-blend-mode: color, hue;
+.titlebar .titlebutton {
+    min-height: 18px;
+    min-width: 26px;
+    background-position: 0 0;
+    background-clip: content-box;
 }
 
+:not(.maximized):not(.fullscreen) .titlebar .titlebutton {
+    margin-bottom: 1px;
+}
+
+.maximized .titlebar .titlebutton.close, .fullscreen .titlebar .titlebutton.close {
+    padding-right: 8px;
+}
+
+.titlebar .titlebutton.close {
+    min-width: 43px;
+    background-image: url("assets/close-normal.png");
+}
+.titlebar .titlebutton.close:hover {
+    background-image: url("assets/close-hover.png");
+}
+.titlebar .titlebutton.close:active {
+    background-image: url("assets/close-active.png");
+}
 .titlebar .titlebutton.close:backdrop:not(:hover) {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/close-backdrop.png");
+    background-image: url("assets/close-backdrop.png");
+}
+.titlebar .titlebutton.close:backdrop:active {
+    background-image: url("assets/close-active.png");
 }
 .titlebar .titlebutton.minimize {
-    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/minimize-normal.png");
+    background-image: url("assets/minimize-normal.png");
 }
 .titlebar .titlebutton.minimize:hover {
-    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/minimize-hover.png");
+    background-image: url("assets/minimize-hover.png");
 }
 .titlebar .titlebutton.minimize:active {
-    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/minimize-active.png");
+    background-image: url("assets/minimize-active.png");
 }
 .titlebar .titlebutton.minimize:backdrop:not(:hover) {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/minimize-backdrop.png");
+    background-image: url("assets/minimize-backdrop.png");
 }
 .titlebar .titlebutton.minimize:backdrop:active {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/minimize-active.png");
+    background-image: url("assets/minimize-active.png");
 }
 .titlebar .titlebutton.maximize {
-    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/maximize-normal.png");
+    background-image: url("assets/maximize-normal.png");
 }
 .titlebar .titlebutton.maximize:hover {
-    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/maximize-hover.png");
+    background-image: url("assets/maximize-hover.png");
 }
 .titlebar .titlebutton.maximize:active {
-    background-image: linear-gradient(@custom_accent_button_1, transparent), linear-gradient(@custom_accent_button_2, transparent), url("assets/maximize-active.png");
+    background-image: url("assets/maximize-active.png");
 }
 .titlebar .titlebutton.maximize:backdrop:not(:hover) {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/maximize-backdrop.png");
+    background-image: url("assets/maximize-backdrop.png");
 }
 .titlebar .titlebutton.maximize:backdrop:active {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/maximize-active.png");
+    background-image: url("assets/maximize-active.png");
 }
 .maximized .titlebar .titlebutton.maximize {
-    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-normal.png");
+    background-image: url("assets/restore-normal.png");
 }
 .maximized .titlebar .titlebutton.maximize:hover {
-    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-hover.png");
+    background-image: url("assets/restore-hover.png");
 }
 .maximized .titlebar .titlebutton.maximize:active {
-    background-image: image(@custom_accent_button_1), image(@custom_accent_button_2), url("assets/restore-active.png");
+    background-image: url("assets/restore-active.png");
 }
 .maximized .titlebar .titlebutton.maximize:backdrop:not(:hover) {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/restore-backdrop.png");
+    background-image: url("assets/restore-backdrop.png");
 }
 .maximized .titlebar .titlebutton.maximize:backdrop:active {
-    background-image: image(@custom_accent_button_1_backdrop), image(@custom_accent_button_2_backdrop), url("assets/restore-active.png");
+    background-image: url("assets/restore-active.png");
 }
 
 /* Window */
@@ -109,13 +124,14 @@
     border: 2px groove mix(@custom_accent, black, 0.33333);
     border-right-style: ridge;
     border-bottom-style: ridge;
-
-    background-color: @custom_accent;
-    background-image: url("assets/reflection.png");
 }
 
-:not(.maximized):not(.fullscreen) decoration:backdrop {
-    background-color: @custom_accent_backdrop;
+:not(.maximized):not(.fullscreen) decoration, .maximized .titlebar, .fullscreen .titlebar {
+    background: top left no-repeat url("assets/frameglow.png"), top right no-repeat url("assets/frameglow-flipped.png"), repeat @custom_accent url("assets/reflection-tiled.png");
+}
+
+:not(.maximized):not(.fullscreen) decoration:backdrop, .maximized .titlebar:backdrop, .fullscreen .titlebar:backdrop {
+    background: top left no-repeat url("assets/frameglow-inactive.png"), top right no-repeat url("assets/frameglow-inactive-flipped.png"), repeat @custom_accent_backdrop url("assets/reflection-tiled.png");
     border-color: mix(@custom_accent_backdrop, black, 0.33333);
 }
 
