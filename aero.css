@@ -1,0 +1,4 @@
+/* Custom Aero accent color */
+
+@define-color custom_accent #bad2ea;
+@define-color custom_accent_backdrop mix(mix(@custom_accent, white, 0.5), gray, 0.2);

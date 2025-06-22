@@ -1,9 +1,8 @@
 @import 'colors.css';
 
-/* Colors */
+/* Custom Aero colors */
 
-@define-color custom_accent #bad2ea;
-@define-color custom_accent_backdrop mix(mix(@custom_accent, white, 0.5), gray, 0.2);
+@import 'aero.css';
 
 /* Title bar */
 
@@ -117,7 +116,7 @@
 
 /* Window */
 
-:not(.maximized):not(.fullscreen) decoration {
+:not(.maximized):not(.fullscreen):not(.popup) > decoration {
     border-radius: 8px;
     padding: 6px;
     padding-top: 0;
@@ -126,13 +125,17 @@
     border-bottom-style: ridge;
 }
 
-:not(.maximized):not(.fullscreen) decoration, .maximized .titlebar, .fullscreen .titlebar {
+:not(.maximized):not(.fullscreen):not(.popup) > decoration, .maximized  >.titlebar, .fullscreen > .titlebar {
     background: top left no-repeat url("assets/frameglow.png"), top right no-repeat url("assets/frameglow-flipped.png"), repeat @custom_accent url("assets/reflection-tiled.png");
 }
 
-:not(.maximized):not(.fullscreen) decoration:backdrop, .maximized .titlebar:backdrop, .fullscreen .titlebar:backdrop {
+:not(.maximized):not(.fullscreen):not(.popup) > decoration:backdrop, .maximized > .titlebar:backdrop, .fullscreen > .titlebar:backdrop {
     background: top left no-repeat url("assets/frameglow-inactive.png"), top right no-repeat url("assets/frameglow-inactive-flipped.png"), repeat @custom_accent_backdrop url("assets/reflection-tiled.png");
     border-color: mix(@custom_accent_backdrop, black, 0.33333);
+}
+
+.maximized > .titlebar, .fullscreen > .titlebar {
+    background-position: top left -3px -3px, top right 3px -3px, 0;
 }
 
 @define-color custom_accent_border_dark mix(@custom_accent, black, 0.5);
@@ -140,7 +143,7 @@
 @define-color custom_accent_border_dark_backdrop mix(@custom_accent_backdrop, black, 0.5);
 @define-color custom_accent_border_light_backdrop mix(@custom_accent_backdrop, white, 0.5);
 
-window, dialog {
+window:not(.popup), dialog:not(.popup) {
     box-shadow:
         2px 0 @custom_accent_border_light,
         -2px 0 @custom_accent_border_light,
@@ -160,7 +163,7 @@ window, dialog {
         -0.5px -0.5px @custom_accent_border_dark;
 }
 
-window:backdrop, dialog:backdrop {
+window:not(.popup):backdrop, dialog:not(.popup):backdrop {
     box-shadow:
         2px 0 @custom_accent_border_light_backdrop,
         -2px 0 @custom_accent_border_light_backdrop,
